@@ -5,6 +5,7 @@ This is the second project (first with vue-cli), developing due the video course
 ## Applied technologies:
 
 1. [Vue.js](https://vuejs.org/)
+2. [Vue CLI v.2](https://github.com/vuejs/vue-cli/tree/v2#vue-cli--) (was presented in the course), using it's [webpack-simple](https://github.com/vuejs-templates/webpack-simple) project template
 2. [ECMAScript6](https://www.ecma-international.org/ecma-262/6.0/)
 3. [Babel](https://babeljs.io/)
 4. [Webpack](https://webpack.js.org/)
