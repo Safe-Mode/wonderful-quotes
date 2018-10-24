@@ -35,6 +35,6 @@
 
 <style lang="css">
   .counter__progress {
-    min-height: 20px;
+    min-height: 25px;
   }
 </style>
