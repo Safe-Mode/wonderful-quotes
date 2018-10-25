@@ -11,15 +11,23 @@
 </template>
 
 <script>
+  import {eventBus} from '../main'
+
   export default {
     data () {
       return {
+        quotes: eventBus.$data.quotes,
         isHover: false
       }
     },
     props: {
-      quote: String,
-      removeQuote: Function
+      quote: String
+    },
+    methods: {
+      removeQuote (quote) {
+        this.quotes.splice(this.quotes.indexOf(quote), 1)
+        eventBus.$emit('deleteQuote', this.quotes)
+      }
     }
   }
 </script>

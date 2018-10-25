@@ -2,7 +2,7 @@
   <div class="add-quote col-md-6 mx-auto"
       id="add-quote">
     <form action="/"
-        @submit.prevent="addQuote(currentQuote, $event, resetCurrentQuote)">
+        @submit.prevent="addQuote(currentQuote, $event)">
       <fieldset class="form-group">
         <label for="add-quote"
             class="add-quote__label h4">Quote</label>
@@ -22,19 +22,30 @@
 </template>
 
 <script>
+  import {eventBus} from '../main'
+
   export default {
     name: 'add-quote',
     data () {
       return {
-        currentQuote: null
+        quantity: eventBus.$data.quantity,
+        quotes: eventBus.$data.quotes,
+        currentQuote: null,
+        minQuoteLength: 2
       }
     },
-    props: {
-      addQuote: Function
-    },
     methods: {
-      resetCurrentQuote () {
-        this.currentQuote = null
+      isAppendable (embed) {
+        return embed &&
+            embed.trim().length >= this.minQuoteLength &&
+            this.quantity.current() < this.quantity.max
+      },
+      addQuote (quote, evt) {
+        if (this.isAppendable(quote)) {
+          this.quotes.push(quote)
+          this.currentQuote = null
+          eventBus.$emit('addQuote', this.quotes)
+        }
       }
     }
   }

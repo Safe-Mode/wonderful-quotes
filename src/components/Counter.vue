@@ -13,17 +13,17 @@
 </template>
 
 <script>
+  import {eventBus} from '../main'
+
   export default {
     name: 'counter',
     data () {
       return {
         bar: {
           minWidthFactor: 0.5
-        }
+        },
+        quantity: eventBus.$data.quantity
       }
-    },
-    props: {
-      quantity: Object
     },
     computed: {
       barWidth () {

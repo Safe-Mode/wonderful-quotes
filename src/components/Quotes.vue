@@ -5,7 +5,6 @@
       <li class="quotes__item col-sm-6 col-md-4 col-lg-3"
           v-for="quote, index in quotes">
         <quote :quote="quote"
-            :removeQuote="removeQuote"
             :key="index"></quote>
       </li>
     </ul>
@@ -14,14 +13,25 @@
 
 <script>
   import Quote from './Quote'
+  import {eventBus} from '../main'
 
   export default {
-    props: {
-      quotes: Array,
-      removeQuote: Function
+    data () {
+      return {
+        quotes: eventBus.$data.quotes
+      }
     },
     components: {
       Quote
+    },
+    methods: {
+      onQuotesChange (quotes) {
+        this.quotes = quotes
+      }
+    },
+    created () {
+      eventBus.$on('addQuote', this.onQuotesChange),
+      eventBus.$on('removeQuote', this.onQuotesChange)
     }
   }
 </script>
