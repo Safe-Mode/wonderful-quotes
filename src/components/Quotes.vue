@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="quotes jumbotron"
       id="quotes">
-    <ul class="quotes__list">
+    <ul class="quotes__list d-flex flex-wrap">
       <li class="quotes__item col-sm-6 col-md-4 col-lg-3"
           v-for="quote, index in quotes">
         <quote :quote="quote"
@@ -38,8 +38,6 @@
 
 <style lang="css">
   .quotes__list {
-    display: flex;
-    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     list-style: none;
