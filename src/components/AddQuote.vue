@@ -2,7 +2,7 @@
   <div class="add-quote col-md-6 mx-auto"
       id="add-quote">
     <form action="/"
-        @submit.prevent="">
+        @submit.prevent="addQuote(currentQuote, $event, resetCurrentQuote)">
       <fieldset class="form-group">
         <label for="add-quote"
             class="add-quote__label h4">Quote</label>
@@ -27,6 +27,14 @@
     data () {
       return {
         currentQuote: null
+      }
+    },
+    props: {
+      addQuote: Function
+    },
+    methods: {
+      resetCurrentQuote () {
+        this.currentQuote = null
       }
     }
   }

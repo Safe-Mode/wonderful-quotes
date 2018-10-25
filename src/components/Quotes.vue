@@ -5,6 +5,7 @@
       <li class="quotes__item col-sm-6 col-md-4 col-lg-3"
           v-for="quote, index in quotes">
         <quote :quote="quote"
+            :removeQuote="removeQuote"
             :key="index"></quote>
       </li>
     </ul>
@@ -16,7 +17,8 @@
 
   export default {
     props: {
-      quotes: Array
+      quotes: Array,
+      removeQuote: Function
     },
     components: {
       Quote
@@ -27,8 +29,14 @@
 <style lang="css">
   .quotes__list {
     display: flex;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .quotes__item {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 </style>

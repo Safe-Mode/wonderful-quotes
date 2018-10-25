@@ -2,6 +2,7 @@
   <div class="quote card shadow-sm"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
+      @click="removeQuote(quote)"
       :class="[{'bg-danger': isHover}, {'text-white': isHover}]">
     <div class="card-body">
       <p class="quote__text card-text text-center">{{ quote }}</p>
@@ -17,7 +18,8 @@
       }
     },
     props: {
-      quote: String
+      quote: String,
+      removeQuote: Function
     }
   }
 </script>

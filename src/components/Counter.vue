@@ -5,9 +5,9 @@
       <div class="progress-bar"
           role="progressbar"
           :style="{ width: barWidth}"
-          :aria-valuenow="quantity.current"
+          :aria-valuenow="quantity.current()"
           :aria-valuemin="quantity.min"
-          :aria-valuemax="quantity.max">{{ `${quantity.current} / ${quantity.max}` }}</div>
+          :aria-valuemax="quantity.max">{{ `${quantity.current()} / ${quantity.max}` }}</div>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@
     },
     computed: {
       barWidth () {
-        return (this.quantity.current < this.bar.minWidthFactor) ? `${this.quantity.max * this.bar.minWidthFactor}%` : `${this.quantity.current * this.quantity.max}%`
+        return (this.quantity.current() < this.bar.minWidthFactor) ? `${this.quantity.max * this.bar.minWidthFactor}%` : `${this.quantity.current() * this.quantity.max}%`
       }
     }
   }

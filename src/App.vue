@@ -1,10 +1,12 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" class="app container">
     <counter :quantity="quantity"
         class="mb-5"></counter>
     <add-quote
-        class="mb-5"></add-quote>
-    <quotes :quotes="quotes"></quotes>
+        class="mb-5"
+        :addQuote="addQuote"></add-quote>
+    <quotes :quotes="quotes"
+        :removeQuote="removeQuote"></quotes>
   </div>
 </template>
 
@@ -16,13 +18,32 @@
   export default {
     name: 'app',
     data () {
-      return {
+      const data = {
         quantity: {
           min: 0,
           max: 10,
-          current: 0
+          current () {
+            return data.quotes.length
+          }
         },
-        quotes: ['Fuck!']
+        quotes: [],
+        minQuoteLength: 2
+      }
+
+      return data
+    },
+    methods: {
+      addQuote (quote, evt, cb) {
+        if (quote &&
+          quote.trim().length >= this.minQuoteLength &&
+          this.quantity.current() < this.quantity.max
+        ) {
+          this.quotes.push(quote)
+          cb()
+        }
+      },
+      removeQuote (quote) {
+        this.quotes.splice(this.quotes.indexOf(quote), 1)
       }
     },
     components: {
@@ -36,5 +57,9 @@
 <style lang="scss">
   body {
     font-family: "Roboto", sans-serif;
+  }
+
+  .app {
+    // min-height: 100vh;
   }
 </style>
