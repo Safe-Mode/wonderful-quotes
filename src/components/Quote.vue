@@ -2,10 +2,11 @@
   <div class="quote card shadow-sm"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
-      @click="removeQuote(quote)"
       :class="[{'bg-danger': isHover}, {'text-white': isHover}]">
     <div class="card-body">
-      <p class="quote__text card-text text-center">{{ quote }}</p>
+      <p class="quote__text card-text text-center">
+        <slot></slot>
+      </p>
     </div>
   </div>
 </template>
@@ -18,15 +19,6 @@
       return {
         quotes: eventBus.$data.quotes,
         isHover: false
-      }
-    },
-    props: {
-      quote: String
-    },
-    methods: {
-      removeQuote (quote) {
-        this.quotes.splice(this.quotes.indexOf(quote), 1)
-        eventBus.$emit('deleteQuote', this.quotes)
       }
     }
   }

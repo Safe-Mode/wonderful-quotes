@@ -11,10 +11,19 @@ const eventBus = new Vue({
           return data.quotes.length
         }
       },
-      quotes: []
+      quotes: [],
+      currentQuote: null,
+      minQuoteLength: 2
     }
 
     return data;
+  },
+  methods: {
+    isAppendable (embed) {
+      return embed &&
+          embed.trim().length >= this.minQuoteLength &&
+          this.quantity.current() < this.quantity.max
+    }
   }
 })
 

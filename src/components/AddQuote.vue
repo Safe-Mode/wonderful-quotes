@@ -15,7 +15,18 @@
             placeholder="Type your quote"></textarea>
       </fieldset>
 
+      <span class="d-inline-block"
+          v-if="!isAppendable(currentQuote)"
+          data-toggle="popover"
+          data-trigger="hover"
+          :data-content="popoverText">
+        <button class="add-quote__submit btn btn-secondary"
+            type="submit"
+            style="pointer-events: none;"
+            disabled="true">Add quote</button>
+      </span>
       <button class="add-quote__submit btn btn-primary"
+          v-else
           type="submit">Add quote</button>
     </form>
   </div>
@@ -30,23 +41,38 @@
       return {
         quantity: eventBus.$data.quantity,
         quotes: eventBus.$data.quotes,
-        currentQuote: null,
-        minQuoteLength: 2
+        currentQuote: eventBus.$data.currentQuote,
+      }
+    },
+    computed: {
+      popoverText () {
+        if (this.quantity.current() >= this.quantity.max) {
+          return 'Only 10 quotes are available'
+        } else if (!this.currentQuote || this.currentQuote.trim().length < this.minQuoteLength) {
+          return 'Quote should contain at least 2 symbols'
+        }
       }
     },
     methods: {
       isAppendable (embed) {
-        return embed &&
-            embed.trim().length >= this.minQuoteLength &&
-            this.quantity.current() < this.quantity.max
+        return eventBus.isAppendable(embed)
       },
       addQuote (quote, evt) {
         if (this.isAppendable(quote)) {
           this.quotes.push(quote)
           this.currentQuote = null
-          eventBus.$emit('addQuote', this.quotes)
         }
       }
+    },
+    mounted () {
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    },
+    updated () {
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
     }
   }
 </script>

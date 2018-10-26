@@ -4,8 +4,10 @@
     <ul class="quotes__list d-flex flex-wrap">
       <li class="quotes__item col-sm-6 col-md-4 col-lg-3"
           v-for="quote, index in quotes">
-        <quote :quote="quote"
-            :key="index"></quote>
+        <quote @click.native="removeQuote(index)"
+            :key="index">
+          {{ quote }}
+        </quote>
       </li>
     </ul>
   </div>
@@ -21,17 +23,13 @@
         quotes: eventBus.$data.quotes
       }
     },
-    components: {
-      Quote
-    },
     methods: {
-      onQuotesChange (quotes) {
-        this.quotes = quotes
+      removeQuote (index) {
+        this.quotes.splice(index, 1)
       }
     },
-    created () {
-      eventBus.$on('addQuote', this.onQuotesChange),
-      eventBus.$on('removeQuote', this.onQuotesChange)
+    components: {
+      Quote
     }
   }
 </script>
