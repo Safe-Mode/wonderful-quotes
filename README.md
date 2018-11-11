@@ -10,6 +10,8 @@ This is the second project (first with vue-cli), developing due the video course
 3. [Babel](https://babeljs.io/)
 4. [Webpack](https://webpack.js.org/)
 
+&emsp;...and [one more feature](https://github.com/standard/standard/blob/master/RULES.md#semicolons)
+
 ## Build Setup
 
 ``` bash
